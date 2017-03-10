@@ -39,7 +39,7 @@ def processRequest(req):
     if req.get("result").get("action") == "request-game":
         res = makeWebhookResult()
         return res
-    else
+    else:
         return {}
     
 
