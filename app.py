@@ -46,7 +46,7 @@ def processRequest(req):
 def makeWebhookResult(data):
     # print(json.dumps(item, indent=4))
 
-    speech = "Let's play"
+    speech = "Starting game"
 
     print("Response:")
     print(speech)
@@ -54,8 +54,8 @@ def makeWebhookResult(data):
     return {
         "speech": speech,
         "displayText": speech,
-        # "data": data,
-        # "contextOut": [],
+        "data": {},
+        "contextOut": [],
         "source": "test-Python_heroku_webhook"
     }
 
