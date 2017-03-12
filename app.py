@@ -33,17 +33,13 @@ def requestUserName(req):
     data = originalRequest.get("data")
     sender = data.get("sender")
     id = sender.get("id")
-    access_token = "EAAOSFv52vZAYBAFnqlPlZAsGuUdVGrrjaktAkZAbBoFZAFEWhPIM0rqL8BSXCPPfjjipakdjZCNWZCPVOWUcZBEiFAhfSNPZBbNY3ExCZAw9bzdnpWic0ZCwdUwCS43hwZCNRVZBZCMsZAWD5EnHbqPR4YeBvK41ZCcDBUTNKlUUqmSpCYmwwZDZD"
-    rs = urllib.urlopen("https://graph.facebook.com/v2.6/" + id + "?fields=first_name&access_token="+ access_token)
-    name = json.load(rs).get("first_name")
-    print(name)
+    
     return {
-        "speech" : "",
+        "speech" : "playing a game",
         "displayText": "",
         "data": {},
         "contextOut": [],
-        "source": "prof-3abqarino",
-        "followupEvent": {"name":"c_event","data":{"user":name}}
+        "source": "prof-3abqarino"
     }
 
 def makeWebhookResult(req):
