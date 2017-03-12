@@ -1,13 +1,6 @@
 #!/usr/bin/env python
 
-from __future__ import print_function
-from future.standard_library import install_aliases
-install_aliases()
-
-from urllib.parse import urlparse, urlencode
-from urllib.request import urlopen, Request
-from urllib.error import HTTPError
-
+import urllib
 import json
 import os
 
@@ -15,9 +8,9 @@ from flask import Flask
 from flask import request
 from flask import make_response
 
+
 # Flask app should start in global layout
 app = Flask(__name__)
-
 
 @app.route('/webhook', methods=['POST','GET'])
 def webhook():
@@ -26,43 +19,44 @@ def webhook():
     print("Request:")
     print(json.dumps(req, indent=4))
 
-    res = processRequest(req)
+    res = makeWebhookResult(req)
 
     res = json.dumps(res, indent=4)
-    # print(res)
+    print(res)
     r = make_response(res)
     r.headers['Content-Type'] = 'application/json'
     return r
 
 
-def processRequest(req):
-    if req.get("result").get("action") == "request-game":
-        res = makeWebhookResult()
-        return res
-    else:
-        return {}
-    
-
-def makeWebhookResult(data):
-    # print(json.dumps(item, indent=4))
-
-    speech = "Starting game"
-
-    print("Response:")
-    print(speech)
-
+def requestUserName(req):
+    originalRequest = req.get("originalRequest")
+    data = originalRequest.get("data")
+    sender = data.get("sender")
+    id = sender.get("id")
+    access_token = "EAAOSFv52vZAYBAFnqlPlZAsGuUdVGrrjaktAkZAbBoFZAFEWhPIM0rqL8BSXCPPfjjipakdjZCNWZCPVOWUcZBEiFAhfSNPZBbNY3ExCZAw9bzdnpWic0ZCwdUwCS43hwZCNRVZBZCMsZAWD5EnHbqPR4YeBvK41ZCcDBUTNKlUUqmSpCYmwwZDZD"
+    rs = urllib.urlopen("https://graph.facebook.com/v2.6/" + id + "?fields=first_name&access_token="+ access_token)
+    name = json.load(rs).get("first_name")
+    print(name)
     return {
-        "speech": speech,
-        "displayText": speech,
+        "speech" : "",
+        "displayText": "",
         "data": {},
         "contextOut": [],
-        "source": "test-Python_heroku_webhook"
+        "source": "prof-3abqarino",
+        "followupEvent": {"name":"c_event","data":{"user":name}}
     }
+
+def makeWebhookResult(req):
+    if req.get("result").get("action") == "request-game":
+        return requestUserName(req)
+    else:
+        return {}
+
 
 
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 5000))
 
-    print("Starting app on port %d" % port)
+    #print "Starting app on port %d" % port
 
-    app.run(debug=False, port=port, host='0.0.0.0')
+    app.run(debug=True, port=port, host='0.0.0.0')
