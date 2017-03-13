@@ -8,6 +8,8 @@ from flask import Flask
 from flask import request
 from flask import make_response
 
+import mysql.connector
+
 
 # Flask app should start in global layout
 app = Flask(__name__)
@@ -28,7 +30,7 @@ def webhook():
     return r
 
 
-def requestUserName(req):
+def requestGame(req):
     originalRequest = req.get("originalRequest")
     data = originalRequest.get("data")
     sender = data.get("sender")
@@ -42,9 +44,38 @@ def requestUserName(req):
         "source": "prof-3abqarino"
     }
 
+def requestDB(req):
+    db = mysql.connector.connect(host="localhost",    # your host, usually localhost                               
+                     user="root",         # your username                                                      
+                     passwd="phpMyAdmin_MySQL",  # your password                                               
+                     db="python-db")        # name of the data base
+    # you must create a Cursor object. It will let
+    #  you execute all the queries you need
+    cur = db.cursor()
+
+    # Use all the SQL you like
+    cur.execute("SELECT * FROM user")
+
+    # print all the first cell of all the rows
+    name = "Empty";
+    for row in cur.fetchall():
+        print (row[1])
+        name = row[1]
+
+    db.close()               
+    return {
+        "speech" : name,
+        "displayText": "",
+        "data": {},
+        "contextOut": [],
+        "source": "prof-3abqarino"
+    }
+
 def makeWebhookResult(req):
     if req.get("result").get("action") == "request-game":
-        return requestUserName(req)
+        return requestGame(req)
+    else if req.get("result").get("action") == "get-from-db":
+        return requestDB(req)
     else:
         return {}
 
