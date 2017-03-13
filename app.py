@@ -80,7 +80,6 @@ def insertIntoDB(conn):
 
     conn.commit()
     print "Records created successfully";
-    conn.close()
 
 
 def selectDB(conn):
@@ -96,7 +95,6 @@ def selectDB(conn):
         print "NAME = ", row[1], "\n"
 
     print "Operation done successfully";
-    conn.close()
     
 def requestDB(req):
     name = "Empty";
@@ -105,7 +103,9 @@ def requestDB(req):
     createTable(conn)
     insertIntoDB(conn)
     selectDB(conn)
-                  
+
+    conn.close()
+    
     return {
         "speech" : name,
         "displayText": "",
