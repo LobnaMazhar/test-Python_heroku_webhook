@@ -102,7 +102,9 @@ def requestDB(req):
     conn = connectDB()
    ### createTable(conn)
   ###  insertIntoDB(conn)
+    print "before " + name
     selectDB(conn)
+    print "after " + name
 
     conn.close()
     
