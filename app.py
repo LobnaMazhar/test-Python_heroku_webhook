@@ -100,8 +100,8 @@ def requestDB(req):
     name = "Empty";
     
     conn = connectDB()
-    createTable(conn)
-    insertIntoDB(conn)
+   ### createTable(conn)
+  ###  insertIntoDB(conn)
     selectDB(conn)
 
     conn.close()
