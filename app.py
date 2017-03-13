@@ -95,6 +95,7 @@ def selectDB(conn):
         print "NAME = ", row[1], "\n"
 
     print "Operation done successfully";
+    return name
     
 def requestDB(req):
     name = "Empty";
@@ -103,7 +104,7 @@ def requestDB(req):
    ### createTable(conn)
   ###  insertIntoDB(conn)
     print "before " + name
-    selectDB(conn)
+    name = selectDB(conn)
     print "after " + name
 
     conn.close()
