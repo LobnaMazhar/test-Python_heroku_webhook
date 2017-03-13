@@ -8,8 +8,9 @@ from flask import Flask
 from flask import request
 from flask import make_response
 
-import mysql.connector
+import psycopg2
 
+global name
 
 # Flask app should start in global layout
 app = Flask(__name__)
@@ -44,25 +45,56 @@ def requestGame(req):
         "source": "prof-3abqarino"
     }
 
-def requestDB(req):
-    db = mysql.connector.connect(host="localhost",    # your host, usually localhost                               
-                     user="root",         # your username                                                      
-                     passwd="phpMyAdmin_MySQL",  # your password                                               
-                     db="python-db")        # name of the data base
-    # you must create a Cursor object. It will let
-    #  you execute all the queries you need
-    cur = db.cursor()
+def connectDB():
+    conn = psycopg2.connect(database="testpgdp", user="postgres", password="pgAdmin_postgreSQL", host="127.0.0.1", port="5432")
+    print "Opened database successfully"
+    return conn
 
-    # Use all the SQL you like
-    cur.execute("SELECT * FROM user")
+def createTable(conn):
+    cur = conn.cursor()
+    cur.execute('''CREATE TABLE "USER"
+           (ID INT PRIMARY KEY     NOT NULL,
+           NAME           TEXT    NOT NULL,
+           AGE            INT     NOT NULL);''')
+    print "Table created successfully"
 
-    # print all the first cell of all the rows
-    name = "Empty";
-    for row in cur.fetchall():
-        print (row[1])
+def insertIntoDB(conn):
+    cur = conn.cursor()
+
+    cur.execute("INSERT INTO \"USER\" (ID,NAME,AGE) \
+        VALUES (1, 'Paul', 32)");
+
+    cur.execute("INSERT INTO \"USER\" (ID,NAME,AGE) \
+        VALUES (2, 'Allen', 25)");
+
+    conn.commit()
+    print "Records created successfully";
+    conn.close()
+
+
+def selectDB(conn):
+    cur = conn.cursor()
+
+    cur.execute("SELECT id, name from \"USER\"")
+    rows = cur.fetchall()
+
+    for row in rows:
+        global name
         name = row[1]
+        print "ID = ", row[0]
+        print "NAME = ", row[1], "\n"
 
-    db.close()               
+    print "Operation done successfully";
+    conn.close()
+    
+def requestDB(req):
+    name = "Empty";
+    
+    conn = connectDB()
+    createTable(conn)
+    InsertIntoDB(conn)
+    selectDB(conn)
+                  
     return {
         "speech" : name,
         "displayText": "",
