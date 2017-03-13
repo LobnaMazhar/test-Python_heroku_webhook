@@ -74,7 +74,7 @@ def requestDB(req):
 def makeWebhookResult(req):
     if req.get("result").get("action") == "request-game":
         return requestGame(req)
-    else if req.get("result").get("action") == "get-from-db":
+    elif req.get("result").get("action") == "get-from-db":
         return requestDB(req)
     else:
         return {}
