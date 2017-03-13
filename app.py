@@ -9,6 +9,7 @@ from flask import request
 from flask import make_response
 
 import psycopg2
+import urlparse
 
 global name
 
@@ -46,7 +47,17 @@ def requestGame(req):
     }
 
 def connectDB():
-    conn = psycopg2.connect(database="testpgdp", user="postgres", password="pgAdmin_postgreSQL", host="127.0.0.1", port="5432")
+    urlparse.uses_netloc.append("postgres")
+    url = urlparse.urlparse(os.environ["DATABASE_URL"])
+
+    conn = psycopg2.connect(
+    database=url.path[1:],
+    user=url.username,
+    password=url.password,
+    host=url.hostname,
+    port=url.port
+)
+  ###  conn = psycopg2.connect(database="testpgdp", user="postgres", password="pgAdmin_postgreSQL", host="127.0.0.1", port="5432")
     print "Opened database successfully"
     return conn
 
