@@ -103,7 +103,7 @@ def requestDB(req):
     
     conn = connectDB()
     createTable(conn)
-    InsertIntoDB(conn)
+    insertIntoDB(conn)
     selectDB(conn)
                   
     return {
