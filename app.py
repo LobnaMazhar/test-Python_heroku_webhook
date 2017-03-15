@@ -43,7 +43,7 @@ def requestGame(req):
         "displayText": "",
         "data": {},
         "contextOut": [],
-        "source": "prof-3abqarino"
+        "source": "test-python"
     }
 
 def connectDB():
@@ -114,14 +114,33 @@ def requestDB(req):
         "displayText": "",
         "data": {},
         "contextOut": [],
-        "source": "prof-3abqarino"
+        "source": "test-python"
     }
+
+def requestEvent(req):
+    
+    return {
+        "speech" : "event's speech",
+        "displayText": "",
+        "data": {},
+        "contextOut": [],
+        "source": "test-python",
+        "followupEvent":{
+            "name":"test-event",
+            "data":{
+                "event":"inside event"
+                }
+            }
+        }
+    
 
 def makeWebhookResult(req):
     if req.get("result").get("action") == "request-game":
         return requestGame(req)
     elif req.get("result").get("action") == "get-from-db":
         return requestDB(req)
+    elif req.get("result").get("action") == "test-event":
+        return requestEvent(req)
     else:
         return {}
 
