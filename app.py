@@ -120,7 +120,7 @@ def requestDB(req):
 def requestEvent(req):
     
     return {
-        "speech" : "event's speech",
+        "speech" : "",
         "displayText": "",
         "data": {},
         "contextOut": [],
