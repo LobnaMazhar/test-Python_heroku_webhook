@@ -37,6 +37,9 @@ def requestGame(req):
     data = originalRequest.get("data")
     sender = data.get("sender")
     id = sender.get("id")
+
+    parameter = req.get("result").get("parameters").get("requestParam")
+    print "-------------- " + parameter + " ------------"
     
     return {
         "speech" : "playing a game",
