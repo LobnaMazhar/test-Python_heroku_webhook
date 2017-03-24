@@ -12,7 +12,7 @@ import psycopg2
 import urlparse
 
 global name
-global singletonObject = "original"
+global singletonObject
 
 # Flask app should start in global layout
 app = Flask(__name__)
@@ -141,7 +141,7 @@ def requestSingleton(req):
     global singleton
     
     print singleton
-    if singleton == "original":
+    if singleton == None:
         singleton = "updated"
     print singleton
  
