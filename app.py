@@ -13,7 +13,6 @@ import urlparse
 
 global name
 global singletonObject
-singletonObject = None
 
 # Flask app should start in global layout
 app = Flask(__name__)
@@ -139,15 +138,15 @@ def requestEvent(req):
         }
 
 def requestSingleton(req):
-    global singleton
+    global singletonObject
 
-    if singleton is None:
+    if singletonObject is None:
         print "---- not singleton -----"
-        singleton = "updated"
-    print singleton
+        singletonObject = "updated"
+    print singletonObject
  
     return {
-        "speech" : singleton,
+        "speech" : singletonObject,
         "displayText": "",
         "data": {},
         "contextOut": [],
