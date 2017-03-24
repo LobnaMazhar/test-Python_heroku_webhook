@@ -13,6 +13,7 @@ import urlparse
 
 global name
 global singletonObject
+singletonObject = None
 
 # Flask app should start in global layout
 app = Flask(__name__)
