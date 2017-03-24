@@ -140,7 +140,7 @@ def requestEvent(req):
 def requestSingleton(req):
     global singleton
 
-    if singleton == None:
+    if singleton is None:
         print "---- not singleton -----"
         singleton = "updated"
     print singleton
