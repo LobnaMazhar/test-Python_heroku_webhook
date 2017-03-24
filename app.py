@@ -12,6 +12,7 @@ import psycopg2
 import urlparse
 
 global name
+global singletonObject = "original"
 
 # Flask app should start in global layout
 app = Flask(__name__)
@@ -135,7 +136,22 @@ def requestEvent(req):
                 }
             }
         }
+
+def requestSingleton(req):
+    global singleton
     
+    print singleton
+    if singleton == "original":
+        singleton = "updated"
+    print singleton
+ 
+    return {
+        "speech" : singleton,
+        "displayText": "",
+        "data": {},
+        "contextOut": [],
+        "source": "test-python"
+    }
 
 def makeWebhookResult(req):
     if req.get("result").get("action") == "request-game":
@@ -144,6 +160,8 @@ def makeWebhookResult(req):
         return requestDB(req)
     elif req.get("result").get("action") == "test-event":
         return requestEvent(req)
+    elif req.get("result").get("action") == "test-singleton":
+        return requestSingleton(req)
     else:
         return {}
 
