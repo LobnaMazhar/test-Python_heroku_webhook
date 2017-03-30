@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+from Data import Database
 
 import urllib
 import json
@@ -163,6 +164,9 @@ def makeWebhookResult(req):
         return requestEvent(req)
     elif req.get("result").get("action") == "test-singleton":
         return requestSingleton(req)
+    elif req.get("result").get("action") == "createDB":
+        conn = Database.Database()
+        return conn.__createTables__(conn.connection)
     else:
         return {}
 
