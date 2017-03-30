@@ -35,7 +35,7 @@ class Database:
         self.createTable_Questions_Answers()
         print "--------Tables created successfully--------"
 
-        conn.close()
+        self.connection.close()
         
         return {
         "speech" : "Created tables",

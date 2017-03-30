@@ -111,19 +111,7 @@ def requestDB(req):
    ### createTable(conn)
   ###  insertIntoDB(conn)
     
-    print "before " + name
-    name = selectDB(conn)
-    print "after " + name
-
-    conn.close()
     
-    return {
-        "speech" : name,
-        "displayText": "",
-        "data": {},
-        "contextOut": [],
-        "source": "test-python"
-    }
 
 def requestEvent(req):
     
@@ -175,6 +163,7 @@ def makeWebhookResult(req):
     elif req.get("result").get("action") == "test-singleton":
         return requestSingleton(req)
     elif req.get("result").get("action") == "createDB":
+        requestDB(req)
         conn = Database.Database()
         return conn.__createTables__()
     else:
