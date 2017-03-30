@@ -107,8 +107,10 @@ def requestDB(req):
     name = "Empty";
     
     conn = connectDB()
+    createTable_Answers(conn)
    ### createTable(conn)
   ###  insertIntoDB(conn)
+    
     print "before " + name
     name = selectDB(conn)
     print "after " + name
@@ -155,6 +157,14 @@ def requestSingleton(req):
         "source": "test-python"
     }
 
+def createTable_Answers(conn):
+        print "--------in Database createTable_Answers--------"
+        cur = conn.cursor()
+        cur.execute('''CREATE TABLE "AnswersOut"
+               (ID SERIAL PRIMARY KEY NOT NULL,
+               Answer TEXT NOT NULL);''')
+        print "--------Table Answers created successfully--------"
+
 def makeWebhookResult(req):
     if req.get("result").get("action") == "request-game":
         return requestGame(req)
@@ -166,7 +176,7 @@ def makeWebhookResult(req):
         return requestSingleton(req)
     elif req.get("result").get("action") == "createDB":
         conn = Database.Database()
-        return conn.__createTables__(conn.connection)
+        return conn.__createTables__()
     else:
         return {}
 
