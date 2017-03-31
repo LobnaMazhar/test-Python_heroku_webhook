@@ -75,6 +75,14 @@ def createTable(conn):
            AGE            INT     NOT NULL);''')
     print "Table created successfully"
 
+def createTable_Answers(conn):
+        print "--------in Database createTable_Answers--------"
+        cur = conn.cursor()
+        cur.execute('''CREATE TABLE "AnswersOut"
+               (ID SERIAL PRIMARY KEY NOT NULL,
+               Answer TEXT NOT NULL);''')
+        print "--------Table Answers created successfully--------"
+
 def insertIntoDB(conn):
     cur = conn.cursor()
 
@@ -111,7 +119,19 @@ def requestDB(req):
    ### createTable(conn)
   ###  insertIntoDB(conn)
     
+    print "before " + name
+    name = selectDB(conn)
+    print "after " + name
+
+    conn.close()
     
+    return {
+        "speech" : name,
+        "displayText": "",
+        "data": {},
+        "contextOut": [],
+        "source": "test-python"
+    }
 
 def requestEvent(req):
     
@@ -144,14 +164,6 @@ def requestSingleton(req):
         "contextOut": [],
         "source": "test-python"
     }
-
-def createTable_Answers(conn):
-        print "--------in Database createTable_Answers--------"
-        cur = conn.cursor()
-        cur.execute('''CREATE TABLE "AnswersOut"
-               (ID SERIAL PRIMARY KEY NOT NULL,
-               Answer TEXT NOT NULL);''')
-        print "--------Table Answers created successfully--------"
 
 def makeWebhookResult(req):
     if req.get("result").get("action") == "request-game":
