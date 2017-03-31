@@ -117,7 +117,7 @@ def requestDB(req):
     conn = connectDB()
    ### createTable_Answers(conn)
     ###createTable(conn)
-    insertIntoDB(conn)
+  ###  insertIntoDB(conn)
     
     print "before " + name
     name = selectDB(conn)
