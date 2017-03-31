@@ -81,6 +81,7 @@ def createTable_Answers(conn):
     cur.execute('''CREATE TABLE "AnswersOut"
             (ID SERIAL PRIMARY KEY NOT NULL,
             Answer TEXT NOT NULL);''')
+    conn.commit()
     print "--------Table Answers created successfully--------"
 
 def insertIntoDB(conn):
@@ -115,7 +116,7 @@ def requestDB(req):
     name = "Empty";
     
     conn = connectDB()
-   ### createTable_Answers(conn)
+    createTable_Answers(conn)
     ###createTable(conn)
   ###  insertIntoDB(conn)
     
