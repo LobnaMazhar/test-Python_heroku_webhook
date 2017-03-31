@@ -69,7 +69,7 @@ def connectDB():
 
 def createTable(conn):
     cur = conn.cursor()
-    cur.execute('''CREATE TABLE "USER"
+    cur.execute('''CREATE TABLE "USERNEXT"
            (ID INT PRIMARY KEY     NOT NULL,
            NAME           TEXT    NOT NULL,
            AGE            INT     NOT NULL);''')
@@ -116,7 +116,7 @@ def requestDB(req):
     
     conn = connectDB()
     createTable_Answers(conn)
-    createTable(conn)
+    ###createTable(conn)
   ###  insertIntoDB(conn)
     
     print "before " + name
