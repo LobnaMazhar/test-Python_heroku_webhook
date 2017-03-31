@@ -76,12 +76,12 @@ def createTable(conn):
     print "Table created successfully"
 
 def createTable_Answers(conn):
-        print "--------in Database createTable_Answers--------"
-        cur = conn.cursor()
-        cur.execute('''CREATE TABLE "AnswersOut"
-               (ID SERIAL PRIMARY KEY NOT NULL,
-               Answer TEXT NOT NULL);''')
-        print "--------Table Answers created successfully--------"
+    print "--------in Database createTable_Answers--------"
+    cur = conn.cursor()
+    cur.execute('''CREATE TABLE "AnswersOut"
+            (ID SERIAL PRIMARY KEY NOT NULL,
+            Answer TEXT NOT NULL);''')
+    print "--------Table Answers created successfully--------"
 
 def insertIntoDB(conn):
     cur = conn.cursor()
@@ -116,7 +116,7 @@ def requestDB(req):
     
     conn = connectDB()
     createTable_Answers(conn)
-   ### createTable(conn)
+    createTable(conn)
   ###  insertIntoDB(conn)
     
     print "before " + name
