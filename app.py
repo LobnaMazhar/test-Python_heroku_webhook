@@ -69,7 +69,7 @@ def connectDB():
 
 def createTable(conn):
     cur = conn.cursor()
-    cur.execute('''CREATE TABLE "USERNEXT"
+    cur.execute('''CREATE TABLE "USER"
            (ID INT PRIMARY KEY     NOT NULL,
            NAME           TEXT    NOT NULL,
            AGE            INT     NOT NULL);''')
@@ -87,10 +87,10 @@ def insertIntoDB(conn):
     cur = conn.cursor()
 
     cur.execute("INSERT INTO \"USER\" (ID,NAME,AGE) \
-        VALUES (1, 'Paul', 32)");
+        VALUES (3, 'Mary', 82)");
 
     cur.execute("INSERT INTO \"USER\" (ID,NAME,AGE) \
-        VALUES (2, 'Allen', 25)");
+        VALUES (4, 'Jack', 12)");
 
     conn.commit()
     print "Records created successfully";
@@ -115,9 +115,9 @@ def requestDB(req):
     name = "Empty";
     
     conn = connectDB()
-    createTable_Answers(conn)
-    createTable(conn)
-  ###  insertIntoDB(conn)
+   ### createTable_Answers(conn)
+    ###createTable(conn)
+    insertIntoDB(conn)
     
     print "before " + name
     name = selectDB(conn)
