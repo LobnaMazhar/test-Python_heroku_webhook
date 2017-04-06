@@ -47,7 +47,7 @@ def requestGame(req):
     print "-------------- " + parameter + " ------------"
     
     return {
-        "speech" : parameter,
+        "speech" : "",
         "displayText": "",
         "data": {},
         "contextOut": [],
