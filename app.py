@@ -51,7 +51,13 @@ def requestGame(req):
         "displayText": "",
         "data": {},
         "contextOut": [],
-        "source": "test-python"
+        "source": "test-python",
+        "followupEvent":{
+            "name":"param",
+            "data":{
+                "event":parameter
+                }
+            }
     }
 
 def connectDB():
