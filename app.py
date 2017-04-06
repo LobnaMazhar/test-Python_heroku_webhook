@@ -116,7 +116,7 @@ def requestDB(req):
     name = "Empty";
     
     conn = connectDB()
-    createTable_Answers(conn)
+   ### createTable_Answers(conn)
     ###createTable(conn)
   ###  insertIntoDB(conn)
     
@@ -166,6 +166,40 @@ def requestSingleton(req):
         "source": "test-python"
     }
 
+def getRandomName(conn):
+    cur = conn.cursor()
+
+    cur.execute("SELECT * FROM \"USER\" OFFSET floor(random()*(SELECT COUNT(*) FROM \"USER\")) LIMIT 1")
+    rows = cur.fetchall()
+
+    for row in rows:
+        global name
+        name = row[1]
+        print "ID = ", row[0]
+        print "NAME = ", row[1], "\n"
+
+    print "Operation done successfully";
+    return name
+
+def requestRandomName():
+    name = "Empty";
+    
+    conn = connectDB()
+    
+    print "before " + name
+    name = getRandomName(conn)
+    print "after " + name
+
+    conn.close()
+    
+    return {
+        "speech" : name,
+        "displayText": "",
+        "data": {},
+        "contextOut": [],
+        "source": "test-python"
+    }
+
 def makeWebhookResult(req):
     if req.get("result").get("action") == "request-game":
         return requestGame(req)
@@ -179,6 +213,8 @@ def makeWebhookResult(req):
         requestDB(req)
         conn = Database.Database()
         return conn.__createTables__()
+    elif req.get("result").get("action") == "get-random-name":
+        return requestRandomName()
     else:
         return {}
 
