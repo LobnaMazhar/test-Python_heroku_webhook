@@ -43,9 +43,11 @@ def requestGame(req):
 
     parameter = req.get("result").get("parameters").get("requestParam")
     print "-------------- " + parameter + " ------------"
+    parameter = "hello game"
+    print "-------------- " + parameter + " ------------"
     
     return {
-        "speech" : "playing a game",
+        "speech" : parameter,
         "displayText": "",
         "data": {},
         "contextOut": [],
