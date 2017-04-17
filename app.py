@@ -126,7 +126,7 @@ def requestDB(req):
     conn = connectDB()
    ### createTable_Answers(conn)
     ###createTable(conn)
-   ### insertIntoDB(conn, "Nany", 20)
+    insertIntoDB(conn, "XYZ", 20)
     
     print "before " + name
     name = selectDB(conn)
