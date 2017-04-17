@@ -105,7 +105,7 @@ def insertIntoDB(conn, Name, age):
    ###     VALUES (5, " + "'" + Name + "'" + ", " + (str)(age) + ")");
 
     cur.execute('''INSERT INTO "USER" (ID,NAME,AGE) \
-        VALUES (6, ''' + "'" + Name + "'" + ", " + (str)(age) + ")");
+        VALUES (7, ''' + "'" + Name + "'" + ", " + (str)(age) + ")");
 
     conn.commit()
     print "Records created successfully";
@@ -132,7 +132,7 @@ def requestDB(req):
     conn = connectDB()
    ### createTable_Answers(conn)
     ###createTable(conn)
-    insertIntoDB(conn, "XYZ", 20)
+  ###  insertIntoDB(conn, "Haya", 20)
     
     print "before " + name
     name = selectDB(conn)
