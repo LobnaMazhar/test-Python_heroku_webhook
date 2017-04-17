@@ -104,8 +104,11 @@ def insertIntoDB(conn, Name, age):
    ### cur.execute("INSERT INTO \"USER\" (ID,NAME,AGE) \
    ###     VALUES (5, " + "'" + Name + "'" + ", " + (str)(age) + ")");
 
+   ### cur.execute('''INSERT INTO "USER" (ID,NAME,AGE) \
+   ###     VALUES (8, ''' + "'" + Name + "'" + ", " + (str)(age) + ")");
+
     cur.execute('''INSERT INTO "USER" (ID,NAME,AGE) \
-        VALUES (8, ''' + "'" + Name + "'" + ", " + (str)(age) + ")");
+        VALUES (8, ''' + "'" + Name + "'" + ", " + (str)(age) + ")" + " ON CONFLICT (ID) DO NOTHING");
 
     conn.commit()
     print "Records created successfully";
