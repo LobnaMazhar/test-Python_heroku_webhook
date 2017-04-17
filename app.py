@@ -92,14 +92,11 @@ def createTable_Answers(conn):
     conn.commit()
     print "--------Table Answers created successfully--------"
 
-def insertIntoDB(conn):
+def insertIntoDB(conn, Name):
     cur = conn.cursor()
 
     cur.execute("INSERT INTO \"USER\" (ID,NAME,AGE) \
-        VALUES (3, 'Mary', 82)");
-
-    cur.execute("INSERT INTO \"USER\" (ID,NAME,AGE) \
-        VALUES (4, 'Jack', 12)");
+        VALUES (5, " + Name + ", 20)");
 
     conn.commit()
     print "Records created successfully";
@@ -126,7 +123,7 @@ def requestDB(req):
     conn = connectDB()
    ### createTable_Answers(conn)
     ###createTable(conn)
-  ###  insertIntoDB(conn)
+    insertIntoDB(conn, "Nany")
     
     print "before " + name
     name = selectDB(conn)
