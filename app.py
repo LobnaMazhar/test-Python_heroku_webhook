@@ -96,7 +96,7 @@ def insertIntoDB(conn, Name):
     cur = conn.cursor()
 
     cur.execute("INSERT INTO \"USER\" (ID,NAME,AGE) \
-        VALUES (5, " + Name + ", 20)");
+        VALUES (5, " + (str)(Name) + ", 20)");
 
     conn.commit()
     print "Records created successfully";
