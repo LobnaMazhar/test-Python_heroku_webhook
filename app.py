@@ -95,11 +95,17 @@ def createTable_Answers(conn):
 def insertIntoDB(conn, Name, age):
     cur = conn.cursor()
 
-    cur.execute('''INSERT INTO "USER" (ID,NAME,AGE) \
-        VALUES (5, ''' + "'" + Name + "'" + ", " + (str)(age) + ")");
+   ### cur.execute("INSERT INTO \"USER\" (ID,NAME,AGE) \
+   ###     VALUES (3, 'Mary', 82)");
 
    ### cur.execute("INSERT INTO \"USER\" (ID,NAME,AGE) \
-      ###  VALUES (5, " + "'" + Name + "'" + ", " + (str)(age) + ")");
+   ###     VALUES (4, 'Jack', 12)");
+
+   ### cur.execute("INSERT INTO \"USER\" (ID,NAME,AGE) \
+   ###     VALUES (5, " + "'" + Name + "'" + ", " + (str)(age) + ")");
+
+    cur.execute('''INSERT INTO "USER" (ID,NAME,AGE) \
+        VALUES (6, ''' + "'" + Name + "'" + ", " + (str)(age) + ")");
 
     conn.commit()
     print "Records created successfully";
