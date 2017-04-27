@@ -222,7 +222,7 @@ def requestUserName(req):
     data = originalRequest.get("data")
     sender = data.get("sender")
     id = sender.get("id")
-    access_token = config.access_token
+    access_token = "EAASr1ZCrcjQkBADfZCmEo87CLaDUTy9pDWWn8CZCX45ekEcHxbk459jAcGnyGENSZBbcNuSLgRGjToh3MXPUYeqZBlEwEtl3yVinBBFdxdssk1Ga2n7zTfKLMiiXsuU35H3KsPrISHmaDbsSZAoa6PQes8V2sqBRVJZAEYOqIZB5vwZDZD"
     rs = urllib.urlopen("https://graph.facebook.com/v2.6/" + id + "?fields=first_name&access_token=" + access_token)
     name = json.load(rs).get("first_name")
     print(name)
