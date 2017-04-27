@@ -217,6 +217,24 @@ def requestRandomName():
         "source": "test-python"
     }
 
+def requestUserName(req):
+    originalRequest = req.get("originalRequest")
+    data = originalRequest.get("data")
+    sender = data.get("sender")
+    id = sender.get("id")
+    access_token = config.access_token
+    rs = urllib.urlopen("https://graph.facebook.com/v2.6/" + id + "?fields=first_name&access_token=" + access_token)
+    name = json.load(rs).get("first_name")
+    print(name)
+    return {
+        "speech": "",
+        "displayText": "",
+        "data": {},
+        "contextOut": [],
+        "source": "username",
+        "followupEvent": {"name": "username-event", "data": {"user": name}}
+        }
+
 def makeWebhookResult(req):
     if req.get("result").get("action") == "request-game":
         return requestGame(req)
@@ -232,6 +250,8 @@ def makeWebhookResult(req):
         return conn.__createTables__()
     elif req.get("result").get("action") == "get-random-name":
         return requestRandomName()
+    elif req.get("result").get("action") == "req-username":
+        return requestUserName(req)
     else:
         return {}
 
