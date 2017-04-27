@@ -258,7 +258,7 @@ def addMenu():
                 "title":"Checkout",
                 "url":"https://petersapparel.parseapp.com/checkout",
                 "webview_height_ratio": "full",
-                "messenger_extensions": true
+                "messenger_extensions": True
                 },
             {
                 "type":"web_url",
