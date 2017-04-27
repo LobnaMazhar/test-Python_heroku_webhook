@@ -2,6 +2,7 @@
 from Data import Database
 
 import urllib
+import urllib2
 import json
 import os
 
@@ -235,6 +236,44 @@ def requestUserName(req):
         "followupEvent": {"name": "username-event", "data": {"user": name}}
         }
 
+def addMenu():
+    access_token = "EAASr1ZCrcjQkBADfZCmEo87CLaDUTy9pDWWn8CZCX45ekEcHxbk459jAcGnyGENSZBbcNuSLgRGjToh3MXPUYeqZBlEwEtl3yVinBBFdxdssk1Ga2n7zTfKLMiiXsuU35H3KsPrISHmaDbsSZAoa6PQes8V2sqBRVJZAEYOqIZB5vwZDZD"
+    url = "https://graph.facebook.com/v2.6/me/thread_settings?access_token=" + access_token
+    values = {
+        "setting_type" : "call_to_actions",
+        "thread_state" : "existing_thread",
+        "call_to_actions":[
+            {
+                "type":"postback",
+                "title":"Help",
+                "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_HELP"
+                },
+            {
+                "type":"postback",
+                "title":"Start a New Order",
+                "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_START_ORDER"
+                },
+            {
+                "type":"web_url",
+                "title":"Checkout",
+                "url":"https://petersapparel.parseapp.com/checkout",
+                "webview_height_ratio": "full",
+                "messenger_extensions": true
+                },
+            {
+                "type":"web_url",
+                "title":"View Website",
+                "url":"https://petersapparel.parseapp.com/"
+                }
+            ]
+        }
+
+    req = urllib2.Request(url, json.dumps(values), headers={'Content-type': 'application/json', 'Accept': 'application/json'})
+    response = urllib2.urlopen(req)
+    the_page = response.read()
+    print "--------------------->>>>>>>>>>>>>>" + the_page + "<<<<<<<<<<<<--------------------"
+    
+
 def makeWebhookResult(req):
     if req.get("result").get("action") == "request-game":
         return requestGame(req)
@@ -252,6 +291,8 @@ def makeWebhookResult(req):
         return requestRandomName()
     elif req.get("result").get("action") == "req-username":
         return requestUserName(req)
+    elif req.get("result").get("action") == "addMenu":
+        return addMenu()
     else:
         return {}
 
