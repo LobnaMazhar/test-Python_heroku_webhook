@@ -2,7 +2,7 @@
 from Data import Database
 
 import urllib
-import urllib2
+import requests
 import json
 import os
 
@@ -237,40 +237,53 @@ def requestUserName(req):
         }
 
 def addMenu():
-    access_token = "EAACEdEose0cBAMqEkZAIPumYPso0XoKuiH43PZCfduqTtaQxi5QZB18Dm9ngAlJTnkjJlSC5aNW6uuPNR1sJHHQJYR3Hqx4gbGAvGCEBd1glOE44r2ZBZA6swcDNeI5nUZBoM26kbj52gQzvnWIGrJNXZBkskkdDKuiN8d8YzjAOVsZA0qD3lCWLJZBxgLU8kUghOSFi3ZBwWnBgZDZD"
-    url = "https://graph.facebook.com/v2.6/me/thread_settings?access_token=" + access_token
+    access_token = "EAASr1ZCrcjQkBADfZCmEo87CLaDUTy9pDWWn8CZCX45ekEcHxbk459jAcGnyGENSZBbcNuSLgRGjToh3MXPUYeqZBlEwEtl3yVinBBFdxdssk1Ga2n7zTfKLMiiXsuU35H3KsPrISHmaDbsSZAoa6PQes8V2sqBRVJZAEYOqIZB5vwZDZD"
+    url = "https://graph.facebook.com/v2.6/me/messenger_profile?access_token=" + access_token
     values = {
-        "setting_type" : "call_to_actions",
-        "thread_state" : "existing_thread",
-        "call_to_actions":[
+  "persistent_menu":[
+    {
+      "locale":"default",
+      "composer_input_disabled":true,
+      "call_to_actions":[
+        {
+          "title":"My Account",
+          "type":"nested",
+          "call_to_actions":[
             {
-                "type":"postback",
-                "title":"Help",
-                "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_HELP"
-                },
+              "title":"Pay Bill",
+              "type":"postback",
+              "payload":"PAYBILL_PAYLOAD"
+            },
             {
-                "type":"postback",
-                "title":"Start a New Order",
-                "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_START_ORDER"
-                },
+              "title":"History",
+              "type":"postback",
+              "payload":"HISTORY_PAYLOAD"
+            },
             {
-                "type":"web_url",
-                "title":"Checkout",
-                "url":"https://petersapparel.parseapp.com/checkout",
-                "webview_height_ratio": "full",
-                "messenger_extensions": True
-                },
-            {
-                "type":"web_url",
-                "title":"View Website",
-                "url":"https://petersapparel.parseapp.com/"
-                }
-            ]
+              "title":"Contact Info",
+              "type":"postback",
+              "payload":"CONTACT_INFO_PAYLOAD"
+            }
+          ]
+        },
+        {
+          "type":"web_url",
+          "title":"Latest News",
+          "url":"http://petershats.parseapp.com/hat-news",
+          "webview_height_ratio":"full"
         }
+      ]
+    },
+    {
+      "locale":"zh_CN",
+      "composer_input_disabled":false
+    }
+  ]
+}
 
-    req = urllib2.Request(url, json.dumps(values), headers={'Content-type': 'application/json', 'Accept': 'application/json'})
-    response = urllib2.urlopen(req)
-    the_page = response.read()
+    r = requests.post(url, data = values, headers={'Content-type': 'application/json'})
+    print(r.status_code, r.reason)
+    print(r.text[:300] + '...')
     print "--------------------->>>>>>>>>>>>>>" + the_page + "<<<<<<<<<<<<--------------------"
     
 
