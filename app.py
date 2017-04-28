@@ -243,7 +243,7 @@ def addMenu():
   "persistent_menu":[
     {
       "locale":"default",
-      "composer_input_disabled":true,
+      "composer_input_disabled":False,
       "call_to_actions":[
         {
           "title":"My Account",
@@ -276,7 +276,7 @@ def addMenu():
     },
     {
       "locale":"zh_CN",
-      "composer_input_disabled":false
+      "composer_input_disabled":False
     }
   ]
 }
@@ -319,7 +319,9 @@ def replyMenu(req):
 
 
 def makeWebhookResult(req):
+    print "-------------DOWN IS REQUEST START------------"
     print req
+    print "-------------UP IS REQUEST END------------"
     if req.get("result").get("action") == "request-game":
         return requestGame(req)
     elif req.get("result").get("action") == "get-from-db":
