@@ -241,7 +241,7 @@ def addMenu():
     url = "https://graph.facebook.com/v2.6/me/messenger_profile?access_token=" + access_token
 
     call_to_actions_submenu = [{
-              "title":"reqGame",
+              "title":"Pay Bill",
               "type":"postback",
               "payload":"PAYBILL_PAYLOAD"
             },
@@ -270,12 +270,12 @@ def addMenu():
     
     presistent_menu = [{
       "locale":"default",
-      "composer_input_disabled":true,
+      "composer_input_disabled":True,
       "call_to_actions":json.dumps(call_to_actions_menu, ensure_ascii=False)
     },
     {
       "locale":"zh_CN",
-      "composer_input_disabled":false
+      "composer_input_disabled":False
     }]
     
     values = {}
