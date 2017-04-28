@@ -284,7 +284,23 @@ def addMenu():
     print(r.status_code, r.reason)
     print(r.text[:300] + '...')
     print "--------------------->>>>>>>>>>>>>>" + the_page + "<<<<<<<<<<<<--------------------"
-    
+
+
+def deleteMenu():
+    access_token = "EAASr1ZCrcjQkBADfZCmEo87CLaDUTy9pDWWn8CZCX45ekEcHxbk459jAcGnyGENSZBbcNuSLgRGjToh3MXPUYeqZBlEwEtl3yVinBBFdxdssk1Ga2n7zTfKLMiiXsuU35H3KsPrISHmaDbsSZAoa6PQes8V2sqBRVJZAEYOqIZB5vwZDZD"
+    url = "https://graph.facebook.com/v2.6/me/messenger_profile?access_token=" + access_token
+    values = {
+        "fields":[
+            "persistent_menu"
+            ]
+        }
+
+    r = requests.delete(url, data = values, headers={'Content-type': 'application/json'})
+    print(r.status_code, r.reason)
+    print(r.text[:300] + '...')
+    print "--------------------->>>>>>>>>>>>>>" + the_page + "<<<<<<<<<<<<--------------------"
+
+
 def replyMenu(req):
     data = req
     if data["object"] == "page":
@@ -300,8 +316,9 @@ def replyMenu(req):
                     if (message_text == "PAYBILL_PAYLOAD"):
                         send_message(sender_id, "Yay! This button works!")
 
+
 def makeWebhookResult(req):
-    print req + "\n----------REQ--------REQ---------"
+    print req + "----------REQ--------REQ---------"
     if req.get("result").get("action") == "request-game":
         return requestGame(req)
     elif req.get("result").get("action") == "get-from-db":
@@ -320,6 +337,8 @@ def makeWebhookResult(req):
         return requestUserName(req)
     elif req.get("result").get("action") == "addMenu":
         return addMenu()
+    elif req.get("result").get("action") == "deleteMenu":
+        return deleteMenu()
     else:
         return {}
 
