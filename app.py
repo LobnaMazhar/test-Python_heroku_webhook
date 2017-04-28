@@ -238,7 +238,7 @@ def requestUserName(req):
 
 def addMenu():
     access_token = "EAASr1ZCrcjQkBADfZCmEo87CLaDUTy9pDWWn8CZCX45ekEcHxbk459jAcGnyGENSZBbcNuSLgRGjToh3MXPUYeqZBlEwEtl3yVinBBFdxdssk1Ga2n7zTfKLMiiXsuU35H3KsPrISHmaDbsSZAoa6PQes8V2sqBRVJZAEYOqIZB5vwZDZD"
-    url = "https://graph.facebook.com/v2.6/me/thread_settings?access_token=" + access_token
+    url = "https://graph.facebook.com/v2.6/1034552696650591/thread_settings?access_token=" + access_token
     values = {
         "setting_type" : "call_to_actions",
         "thread_state" : "existing_thread",
