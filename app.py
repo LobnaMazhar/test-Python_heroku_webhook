@@ -237,7 +237,7 @@ def requestUserName(req):
         }
 
 def addMenu():
-    access_token = "EAACEdEose0cBACZBJYKKrNP2NgrLsfaZA4YrKYbwj02qwgNZBt54ZCHAnR6DZAxns6ZARao7JvZAxJHYZCuAxKbb1XuZAI22d6w9yi1GVWMWwjiPG9zFZAn7Ivc6VLxi0zEJ4SqHeylXb5TYOKsMEnGAWT5fhK6OxAcuCOhsXOUBWGjiyitd218Kol4uq2GFvWK0310R9xUscRSAZDZD"
+    access_token = "EAACEdEose0cBAMqEkZAIPumYPso0XoKuiH43PZCfduqTtaQxi5QZB18Dm9ngAlJTnkjJlSC5aNW6uuPNR1sJHHQJYR3Hqx4gbGAvGCEBd1glOE44r2ZBZA6swcDNeI5nUZBoM26kbj52gQzvnWIGrJNXZBkskkdDKuiN8d8YzjAOVsZA0qD3lCWLJZBxgLU8kUghOSFi3ZBwWnBgZDZD"
     url = "https://graph.facebook.com/v2.6/me/thread_settings?access_token=" + access_token
     values = {
         "setting_type" : "call_to_actions",
