@@ -318,7 +318,7 @@ def replyMenu(req):
 
 
 def makeWebhookResult(req):
-    print req + "----------REQ--------REQ---------"
+    print req
     if req.get("result").get("action") == "request-game":
         return requestGame(req)
     elif req.get("result").get("action") == "get-from-db":
