@@ -284,7 +284,7 @@ def addMenu():
     r = requests.post(url, data = values, headers={'Content-type': 'application/json'})
     print(r.status_code, r.reason)
     print(r.text[:300] + '...')
-    print "--------------------->>>>>>>>>>>>>>" + the_page + "<<<<<<<<<<<<--------------------"
+    print "--------------------->>>>>>>>>>>>>>" + "<<<<<<<<<<<<--------------------"
 
 
 def deleteMenu():
@@ -299,7 +299,7 @@ def deleteMenu():
     r = requests.delete(url, data = values, headers={'Content-type': 'application/json'})
     print(r.status_code, r.reason)
     print(r.text[:300] + '...')
-    print "--------------------->>>>>>>>>>>>>>" + the_page + "<<<<<<<<<<<<--------------------"
+    print "--------------------->>>>>>>>>>>>>>" + "<<<<<<<<<<<<--------------------"
 
 
 def replyMenu(req):
