@@ -239,9 +239,47 @@ def requestUserName(req):
 def addMenu():
     access_token = "EAASr1ZCrcjQkBADfZCmEo87CLaDUTy9pDWWn8CZCX45ekEcHxbk459jAcGnyGENSZBbcNuSLgRGjToh3MXPUYeqZBlEwEtl3yVinBBFdxdssk1Ga2n7zTfKLMiiXsuU35H3KsPrISHmaDbsSZAoa6PQes8V2sqBRVJZAEYOqIZB5vwZDZD"
     url = "https://graph.facebook.com/v2.6/me/messenger_profile?access_token=" + access_token
-    values = {
-  "persistent_menu":[{ "locale":"default", "composer_input_disabled":False, "call_to_actions":[{ "title":"My Account", "type":"nested", "call_to_actions":[{ "title":"reqGame", "type":"postback", "payload":"PAYBILL_PAYLOAD" }, { "title":"History", "type":"postback", "payload":"HISTORY_PAYLOAD"  },  { "title":"Contact Info",  "type":"postback", "payload":"CONTACT_INFO_PAYLOAD"  }  ] }, { "type":"web_url", "title":"Latest News", "url":"http://petershats.parseapp.com/hat-news", "webview_height_ratio":"full" } ] }, { "locale":"zh_CN", "composer_input_disabled":False } ]
-  }
+
+    call_to_actions_submenu = [{
+              "title":"reqGame",
+              "type":"postback",
+              "payload":"PAYBILL_PAYLOAD"
+            },
+            {
+              "title":"History",
+              "type":"postback",
+              "payload":"HISTORY_PAYLOAD"
+            },
+            {
+              "title":"Contact Info",
+              "type":"postback",
+              "payload":"CONTACT_INFO_PAYLOAD"
+            }]
+    
+    call_to_actions_menu = [{
+          "title":"My Account",
+          "type":"nested",
+          "call_to_actions":json.dumps(call_to_actions_submenu, ensure_ascii=False)
+        },
+        {
+          "type":"web_url",
+          "title":"Latest News",
+          "url":"http://petershats.parseapp.com/hat-news",
+          "webview_height_ratio":"full"
+        }]
+    
+    presistent_menu = [{
+      "locale":"default",
+      "composer_input_disabled":true,
+      "call_to_actions":json.dumps(call_to_actions_menu, ensure_ascii=False)
+    },
+    {
+      "locale":"zh_CN",
+      "composer_input_disabled":false
+    }]
+    
+    values = {}
+    values["persistent_menu"] = json.dumps(presistent_menu, ensure_ascii=False)
 
     r = requests.post(url, data = values, headers={'Content-type': 'application/json'})
     print(r.status_code, r.reason)
