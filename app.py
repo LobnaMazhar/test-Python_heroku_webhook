@@ -255,9 +255,8 @@ def deleteMenu():
 
     fields = ["persistent_menu"]
     values = {}
-    values["fields"] = fields
-    print json.dumps(values, ensure_ascii=False)
-    print values
+    values["fields"] = json.dumps(fields, ensure_ascii=False)
+    
 
     r = requests.delete(url, data = values, headers={'Content-type': 'application/json'})
     print(r.status_code, r.reason)
