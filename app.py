@@ -278,7 +278,7 @@ def addMenu():
           "locale":"zh_CN",
           "composer_input_disabled":False
           }
-      + "]"
+      + "]" +
   }
 
     r = requests.post(url, data = values, headers={'Content-type': 'application/json'})
