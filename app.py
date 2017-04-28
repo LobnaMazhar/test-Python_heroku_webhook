@@ -252,7 +252,7 @@ def addMenu():
 def deleteMenu():
     access_token = "EAASr1ZCrcjQkBADfZCmEo87CLaDUTy9pDWWn8CZCX45ekEcHxbk459jAcGnyGENSZBbcNuSLgRGjToh3MXPUYeqZBlEwEtl3yVinBBFdxdssk1Ga2n7zTfKLMiiXsuU35H3KsPrISHmaDbsSZAoa6PQes8V2sqBRVJZAEYOqIZB5vwZDZD"
     url = "https://graph.facebook.com/v2.6/me/messenger_profile?access_token=" + access_token
-    values = { "fields":[ "persistent_menu" ] }
+    values = { "fields":[  ] }
     print values
 
     r = requests.delete(url, data = values, headers={'Content-type': 'application/json'})
