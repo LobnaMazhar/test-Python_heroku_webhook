@@ -321,7 +321,7 @@ def notifyUser():
     paramRecipient = { "id": userID }
     paramMessage = { "text": "hello, world! --OWN app" }
     requestJSON = {}
-    requestJSON["recipient"] = { "id": userID }
+    requestJSON["recipient"] = paramRecipient
     requestJSON["message"] = { "text": "hello, world! --OWN app" }
     
     r = requests.post(url, data = requestJSON, headers={'Content-type': 'application/json'})
