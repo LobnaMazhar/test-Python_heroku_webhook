@@ -311,6 +311,8 @@ def deleteMenu():
 
 
 def notifyUser():
+    print "---------------------CALLLING NOTIFY USER------------------------"
+    
     access_token = "EAASr1ZCrcjQkBADfZCmEo87CLaDUTy9pDWWn8CZCX45ekEcHxbk459jAcGnyGENSZBbcNuSLgRGjToh3MXPUYeqZBlEwEtl3yVinBBFdxdssk1Ga2n7zTfKLMiiXsuU35H3KsPrISHmaDbsSZAoa6PQes8V2sqBRVJZAEYOqIZB5vwZDZD"
     url = "https://graph.facebook.com/v2.6/me/messages?access_token=" + access_token
 
@@ -331,8 +333,10 @@ def notifyUser():
     print "--------------------->>>>>>>>>>>>>>" + "<<<<<<<<<<<<--------------------"
 
 def notifyMeSomeTimes():
+    print "---------------------CALLLING NOTIFY ME------------------------"
     Timer(5, notifyUser, ()).start()
     Timer(10, notifyUser, ()).start()
+    Timer(40, notifyUser, ()).start()
     
 def makeWebhookResult(req):
     print "-------------DOWN IS REQUEST START------------"
@@ -358,6 +362,8 @@ def makeWebhookResult(req):
         return addMenu()
     elif req.get("result").get("action") == "deleteMenu":
         return deleteMenu()
+    elif req.get("result").get("action") == "notify":
+        return notifyMeSomeTimes()
     else:
         return {}
 
