@@ -13,6 +13,9 @@ from flask import make_response
 import psycopg2
 import urlparse
 
+import time
+from threading import timer
+
 global name
 global singletonObject
 singletonObject = None
@@ -307,22 +310,30 @@ def deleteMenu():
     print "--------------------->>>>>>>>>>>>>>" + "SUCCESS" + "<<<<<<<<<<<<--------------------"
 
 
-def replyMenu(req):
-    data = req
-    if data["object"] == "page":
-        for entry in data["entry"]:
-            for messaging_event in entry["messaging"]:
-                if messaging_event.get("postback"):
-                    # user clicked/tapped "postback" button in earlier message
-                    message_text = messaging_event["postback"]["payload"]
-                    # the button's payload
-                    #log("Inside postback")
-                    message_text = message_text.lower()
-                    sender_id = messaging_event["sender"]["id"]
-                    if (message_text == "PAYBILL_PAYLOAD"):
-                        send_message(sender_id, "Yay! This button works!")
+def notifyUser():
+    access_token = "EAASr1ZCrcjQkBADfZCmEo87CLaDUTy9pDWWn8CZCX45ekEcHxbk459jAcGnyGENSZBbcNuSLgRGjToh3MXPUYeqZBlEwEtl3yVinBBFdxdssk1Ga2n7zTfKLMiiXsuU35H3KsPrISHmaDbsSZAoa6PQes8V2sqBRVJZAEYOqIZB5vwZDZD"
+    url = "https://graph.facebook.com/v2.6/me/messages?access_token=" + access_token
 
+    userID = "1034552696650591"
+    
+    requestJSON = {
+        "recipient": {
+            "id": userID
+            },
+        "message": {
+            "text": "hello, world! --OWN app"
+            }
+        }
+    
+    r = requests.post(url, data = requestJSON, headers={'Content-Type: application/json'})
+    print(r.status_code, r.reason)
+    print(r.text[:300] + '...')
+    print "--------------------->>>>>>>>>>>>>>" + "<<<<<<<<<<<<--------------------"
 
+def notifyMeSomeTimes():
+    Timer(5, notifyUser, ()).start()
+    Timer(10, notifyUser, ()).start()
+    
 def makeWebhookResult(req):
     print "-------------DOWN IS REQUEST START------------"
     print req
