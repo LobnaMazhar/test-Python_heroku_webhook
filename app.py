@@ -335,9 +335,13 @@ def notifyMeSomeTimes(req):
     if req.get("result").get("action") == "notify_start":
         notify = True
     elif req.get("result").get("action") == "notify_stop":
+        print "---------------------END OF NOTIFICATIONS------------------------"
         notify = False
-        
+
+    i=0;
     while notify:
+        print "---------------------" + str(i) + "------------------------"
+        i = i+1;
         Timer(20, notifyUser, ()).start()
     
 def makeWebhookResult(req):
