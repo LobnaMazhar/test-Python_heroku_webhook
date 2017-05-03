@@ -329,9 +329,15 @@ def notifyUser():
     print(r.text[:300] + '...')
     print "--------------------->>>>>>>>>>>>>>" + "<<<<<<<<<<<<--------------------"
 
-def notifyMeSomeTimes():
+def notifyMeSomeTimes(req):
     print "---------------------CALLLING NOTIFY ME------------------------"
-    while(True):
+    notify = True
+    if req.get("result").get("action") == "notify_start":
+        notify = True
+    elif req.get("result").get("action") == "notify_stop":
+        notify = False
+        
+    while notify:
         Timer(20, notifyUser, ()).start()
     
 def makeWebhookResult(req):
@@ -358,8 +364,8 @@ def makeWebhookResult(req):
         return addMenu()
     elif req.get("result").get("action") == "deleteMenu":
         return deleteMenu()
-    elif req.get("result").get("action") == "notify":
-        return notifyMeSomeTimes()
+    elif "notify" in req.get("result").get("action"):
+        return notifyMeSomeTimes(req)
     else:
         return {}
 
