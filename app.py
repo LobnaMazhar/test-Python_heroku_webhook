@@ -14,7 +14,7 @@ import psycopg2
 import urlparse
 
 import time
-from threading import timer
+from threading import Timer
 
 global name
 global singletonObject
