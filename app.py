@@ -254,6 +254,11 @@ def addMenu():
               "title":"Contact Info",
               "type":"postback",
               "payload":"CONTACT_INFO_PAYLOAD"
+            },
+            {
+              "title":"Request game",
+              "type":"postback",
+              "payload":"reqGame"
             }]
     
     call_to_actions_menu = [{
