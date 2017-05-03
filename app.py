@@ -317,14 +317,12 @@ def notifyUser():
     url = "https://graph.facebook.com/v2.6/me/messages?access_token=" + access_token
 
     userID = "1034552696650591"
-    
+
+    paramRecipient = { "id": userID }
+    paramMessage = { "text": "hello, world! --OWN app" }
     requestJSON = {
-        "recipient": {
-            "id": userID
-            },
-        "message": {
-            "text": "hello, world! --OWN app"
-            }
+        "recipient": paramRecipient,
+        "message": paramMessage
         }
     
     r = requests.post(url, data = requestJSON, headers={'Content-type': 'application/json'})
