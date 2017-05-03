@@ -327,7 +327,7 @@ def notifyUser():
             }
         }
     
-    r = requests.post(url, data = requestJSON, headers={'Content-Type: application/json'})
+    r = requests.post(url, data = requestJSON, headers={'Content-type': 'application/json'})
     print(r.status_code, r.reason)
     print(r.text[:300] + '...')
     print "--------------------->>>>>>>>>>>>>>" + "<<<<<<<<<<<<--------------------"
