@@ -310,7 +310,7 @@ def deleteMenu():
     print "--------------------->>>>>>>>>>>>>>" + "SUCCESS" + "<<<<<<<<<<<<--------------------"
 
 
-def notifyUser(i):
+def notifyUser():
     print "---------------------CALLLING NOTIFY USER------------------------"
     
     access_token = "EAASr1ZCrcjQkBADfZCmEo87CLaDUTy9pDWWn8CZCX45ekEcHxbk459jAcGnyGENSZBbcNuSLgRGjToh3MXPUYeqZBlEwEtl3yVinBBFdxdssk1Ga2n7zTfKLMiiXsuU35H3KsPrISHmaDbsSZAoa6PQes8V2sqBRVJZAEYOqIZB5vwZDZD"
@@ -319,7 +319,7 @@ def notifyUser(i):
     userID = "1034552696650591"
 
     paramRecipient = { "id": userID }
-    paramMessage = { "text": "hello, world! --OWN app -> " + str(i) }
+    paramMessage = { "text": "hello, world! --OWN app" }
     requestJSON = {}
     requestJSON["recipient"] = json.dumps(paramRecipient, ensure_ascii=False)
     requestJSON["message"] = json.dumps(paramMessage, ensure_ascii=False)
@@ -342,7 +342,7 @@ def notifyMeSomeTimes(req):
     while notify:
         print "---------------------" + str(i) + "------------------------"
         i = i+1;
-        Timer(60, notifyUser, (i)).start()
+        Timer(60, notifyUser, ()).start()
     
 def makeWebhookResult(req):
     print "-------------DOWN IS REQUEST START------------"
