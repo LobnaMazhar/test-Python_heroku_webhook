@@ -364,7 +364,7 @@ def makeWebhookResult(req):
         return addMenu()
     elif req.get("result").get("action") == "deleteMenu":
         return deleteMenu()
-    elif "notify" in req.get("result").get("action"):
+    elif req.get("result").get("action") == "notify_start" or req.get("result").get("action") == "notify_stop":
         return notifyMeSomeTimes(req)
     else:
         return {}
