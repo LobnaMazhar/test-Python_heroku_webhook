@@ -331,9 +331,8 @@ def notifyUser():
 
 def notifyMeSomeTimes():
     print "---------------------CALLLING NOTIFY ME------------------------"
-    Timer(5, notifyUser, ()).start()
-    Timer(10, notifyUser, ()).start()
-    Timer(40, notifyUser, ()).start()
+    while(True):
+        Timer(20, notifyUser, ()).start()
     
 def makeWebhookResult(req):
     print "-------------DOWN IS REQUEST START------------"
