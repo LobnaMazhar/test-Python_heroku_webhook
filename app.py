@@ -39,7 +39,7 @@ def webhook():
     return r
 
 @app.route('/webhooknotify', methods=['POST','GET'])
-def webhook():
+def webhookNotify():
     print "NOTIFYING"
 
 def requestGame(req):
