@@ -41,6 +41,7 @@ def webhook():
 @app.route('/webhooknotify', methods=['POST','GET'])
 def webhookNotify():
     print "NOTIFYING"
+    notifyUser();
 
 def requestGame(req):
     originalRequest = req.get("originalRequest")
