@@ -38,6 +38,9 @@ def webhook():
     r.headers['Content-Type'] = 'application/json'
     return r
 
+@app.route('/webhooknotify', methods=['POST','GET'])
+def webhook():
+    print "NOTIFYING"
 
 def requestGame(req):
     originalRequest = req.get("originalRequest")
