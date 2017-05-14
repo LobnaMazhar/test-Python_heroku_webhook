@@ -367,7 +367,7 @@ def getId_pages():
     print("appsecret_proof --- ")
     print(appsecret_proof)
     
-    url = "https://graph.facebook.com/v2.6/me?fields=ids_for_pages&access_token=" + access_token + "&appsecret_proof=" + appsecret_proof
+    url = "https://graph.facebook.com/v2.6/me?fields=ids_for_pages&access_token=" + access_token ### + "&appsecret_proof=" + appsecret_proof
 
     r = requests.get(url)
     print(r.status_code, r.reason)
