@@ -6,6 +6,10 @@ import requests
 import json
 import os
 
+import facebook
+import hashlib
+import hmac
+
 from flask import Flask
 from flask import request
 from flask import make_response
@@ -347,6 +351,25 @@ def notifyMeSomeTimes(req):
         print "---------------------" + str(i) + "------------------------"
         i = i+1;
         Timer(60, notifyUser, ()).start()
+
+
+def genAppSecretProof(app_secret, access_token):
+    h = hmac.new (
+        app_secret.encode('utf-8'),
+        msg=access_token.encode('utf-8'),
+        digestmod=hashlib.sha256
+    )
+    return h.hexdigest()
+
+def getId_pages():
+    app_secret = "fe692bf9bce1664e2dbe5cf8af0e5db9"
+    access_token="EAACEdEose0cBAK3xy0srLgllZCYTWKZAOUUZCL06BBmozGcOyvmgytVEAPFA0yZAS9iOYW9PhLkpCHelUN4PM8otbTyC5aANr3f8FRykybHGNaJujkMPipVFd2vAZAQWWZAaZCtbazbLZCVL8XSDd5QApI2ntICGMN2ZAFyw5UKzZCXF7oWwqPQtxUdHp9m96pADAIWamviqndZBgZDZD"
+    api = facebook.GraphAPI(access_token)
+    msg = "Hello, world!"
+    postargs = {"appsecret_proof": genAppSecretProof(app_secret, access_token)}
+    status = api.put_wall_post(msg, postargs)
+    
+    print "--------------------->>>>>>>>>>>>>>" + "<<<<<<<<<<<<--------------------"
     
 def makeWebhookResult(req):
     print "-------------DOWN IS REQUEST START------------"
@@ -374,6 +397,8 @@ def makeWebhookResult(req):
         return deleteMenu()
     elif req.get("result").get("action") == "notify_start" or req.get("result").get("action") == "notify_stop":
         return notifyMeSomeTimes(req)
+    elif req.get("result").get("action") == "id_pages":
+        return getId_pages()
     else:
         return {}
 
