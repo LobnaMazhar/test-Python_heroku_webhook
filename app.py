@@ -373,6 +373,18 @@ def getId_pages():
     print(r.status_code, r.reason)
     print(r.text[:300] + '...')
     print "--------------------->>>>>>>>>>>>>>" + "<<<<<<<<<<<<--------------------"
+
+def getAppScopedID(req):
+    access_token="EAASr1ZCrcjQkBACkZA2QzbgaqeAFOH2CZAiGJkyFAYZAgrWzyXdRWXBLMLgDiZAFVL2YL17WM4gA2oeZBaDspgZBETqzARYJtWVSnjqNlrUZAgs8iRT9CSHQUhpI4ZA42YAmhFSTDinxWGvZAz8FpMU5EvqVdVok86qF01d1opiumfSbZB4XSlTQUiAvPxj7OR2Gh3a6fP62ol0nwZDZD"
+    
+    mid = req.get("originalRequest").get("data").get("message").get("mid")
+
+    url = "https://graph.facebook.com/v2.9/" + mid + "?access_token=" + access_token + "&fields=from"
+    r = requests.get(url)
+    print(r.status_code, r.reason)
+    print(r.text[:300] + '...')
+    print(r.get("from").get("id"))
+    print "--------------------->>>>>>>>>>>>>>" + "<<<<<<<<<<<<--------------------"
     
 def makeWebhookResult(req):
     print "-------------DOWN IS REQUEST START------------"
@@ -402,6 +414,8 @@ def makeWebhookResult(req):
         return notifyMeSomeTimes(req)
     elif req.get("result").get("action") == "id_pages":
         return getId_pages()
+    elif req.get("result").get("action") == "appScopedID":
+        return getAppScopedID(req)
     else:
         return {}
 
