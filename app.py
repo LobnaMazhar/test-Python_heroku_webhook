@@ -383,7 +383,7 @@ def getAppScopedID(req):
     r = requests.get(url)
     print(r.status_code, r.reason)
     print(r.text[:300] + '...')
-    print(r.get("from").get("id"))
+   # print(r.get("from").get("id"))
     print "--------------------->>>>>>>>>>>>>>" + "<<<<<<<<<<<<--------------------"
     
 def makeWebhookResult(req):
