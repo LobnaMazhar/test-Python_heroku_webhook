@@ -6,7 +6,6 @@ import requests
 import json
 import os
 
-import facebook
 import hashlib
 import hmac
 
@@ -365,6 +364,8 @@ def getId_pages():
     app_secret = "fe692bf9bce1664e2dbe5cf8af0e5db9"
     access_token="EAACEdEose0cBAK3xy0srLgllZCYTWKZAOUUZCL06BBmozGcOyvmgytVEAPFA0yZAS9iOYW9PhLkpCHelUN4PM8otbTyC5aANr3f8FRykybHGNaJujkMPipVFd2vAZAQWWZAaZCtbazbLZCVL8XSDd5QApI2ntICGMN2ZAFyw5UKzZCXF7oWwqPQtxUdHp9m96pADAIWamviqndZBgZDZD"
     appsecret_proof = genAppSecretProof(app_secret, access_token)
+    print("appsecret_proof --- ")
+    print(appsecret_proof)
     
     url = "https://graph.facebook.com/v2.6/me?fields=ids_for_pages&access_token=" + access_token + "&appsecret_proof=" + appsecret_proof
 
