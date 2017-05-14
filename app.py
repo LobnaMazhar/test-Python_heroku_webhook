@@ -368,7 +368,7 @@ def getId_pages():
     
     url = "https://graph.facebook.com/v2.6/me?fields=ids_for_pages&access_token=" + access_token + "&appsecret_proof=" + appsecret_proof
 
-    r = requests.get(url, data = requestJSON, headers={'Content-type': 'application/json'})
+    r = requests.get(url)
     print(r.status_code, r.reason)
     print(r.text[:300] + '...')
     print "--------------------->>>>>>>>>>>>>>" + "<<<<<<<<<<<<--------------------"
