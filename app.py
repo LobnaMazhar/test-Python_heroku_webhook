@@ -380,7 +380,7 @@ def getAppScopedID(req):
     mid = req.get("originalRequest").get("data").get("message").get("mid")
     print (mid)
     
-    url = "https://graph.facebook.com/v2.9/" + mid + "?access_token=" + access_token + "&fields=from"
+    url = "https://graph.facebook.com/v2.8/m_" + mid + "?access_token=" + access_token + "&fields=from"
     r = requests.get(url)
     print(r.status_code, r.reason)
     print(r.text[:300] + '...')
