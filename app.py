@@ -396,6 +396,8 @@ def makeWebhookResult(req):
     if req.get("result").get("action") == "request-game":
         print "go"
         print config.test
+        print "TEST_KEY"
+        print os.environ["TEST_KEY"]
         return requestGame(req)
     elif req.get("result").get("action") == "get-from-db":
         return requestDB(req)
