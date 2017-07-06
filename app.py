@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 from Data import Database
+import config
 
 import urllib
 import requests
