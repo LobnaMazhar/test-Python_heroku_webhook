@@ -393,6 +393,8 @@ def makeWebhookResult(req):
     print req
     print "-------------UP IS REQUEST END------------"
     if req.get("result").get("action") == "request-game":
+        print "go"
+        print config.test
         return requestGame(req)
     elif req.get("result").get("action") == "get-from-db":
         return requestDB(req)
