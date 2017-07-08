@@ -402,13 +402,13 @@ def notifyWithGIF():
     paramAttachment = {}
     paramAttachment["type"] = "image"
     attachedGif = "https://media.giphy.com/media/26BoDYDTteuyZCh3y/giphy.gif"
-    paramAttachment["payload"] = { "url": attachedGif }
+    paramAttachment["payload"] = "'" + { "url": attachedGif } + "'"
 
     paramRecipient = { "id": userID }
 
     requestJSON = {}
     requestJSON["recipient"] = json.dumps(paramRecipient, ensure_ascii=False)
-    requestJSON["message"] = {"attachment": json.dumps(paramAttachment, ensure_ascii=False)}
+    requestJSON["message"] = "'" + {"attachment": json.dumps(paramAttachment, ensure_ascii=False)} + "'"
 
     print requestJSON
     r = requests.post(url, data=requestJSON, headers={'Content-type': 'application/json'})
