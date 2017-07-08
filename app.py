@@ -410,10 +410,10 @@ def notifyWithButton():
             }
         ]
 
-    paramAttachment = { "attachment": json.dumps(paramAttachmentDetails, ensure_ascii=False)}
     paramAttachmentDetails = {}
     paramAttachmentDetails["type"] = "template"
     paramAttachmentDetails["payload"] = json.dumps(paramPayload, ensure_ascii=False)
+    paramAttachment = { "attachment": json.dumps(paramAttachmentDetails, ensure_ascii=False)}
     
     requestJSON = {}
     requestJSON["recipient"] = json.dumps(paramRecipient, ensure_ascii=False)
