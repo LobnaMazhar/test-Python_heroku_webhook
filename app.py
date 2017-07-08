@@ -45,7 +45,7 @@ def webhook():
 @app.route('/webhooknotify', methods=['POST','GET'])
 def webhookNotify():
     print "NOTIFYING"
-    notifyUser();
+    notifyWithButton();
 
 def requestGame(req):
     originalRequest = req.get("originalRequest")
@@ -390,13 +390,14 @@ def getAppScopedID(req):
     print "--------------------->>>>>>>>>>>>>>" + "<<<<<<<<<<<<--------------------"
 
 def notifyWithButton():
+    print "---------------------CALLLING NOTIFY WITH BUTTON------------------------"
+    
     access_token = "EAASr1ZCrcjQkBADfZCmEo87CLaDUTy9pDWWn8CZCX45ekEcHxbk459jAcGnyGENSZBbcNuSLgRGjToh3MXPUYeqZBlEwEtl3yVinBBFdxdssk1Ga2n7zTfKLMiiXsuU35H3KsPrISHmaDbsSZAoa6PQes8V2sqBRVJZAEYOqIZB5vwZDZD"
-    url = "https://graph.facebook.com/v2.9/me/messages?access_token=" + access_token
+    url = "https://graph.facebook.com/v2.6/me/messages?access_token=" + access_token
 
     userID = "1034552696650591"
 
     paramRecipient = { "id": userID }
-    ###paramPayload = json.dumps(paramUrl, ensure_ascii=False)
     paramAttachment = {}
     paramAttachment["type"] = "template"
     paramAttachment["payload"] = { "template_type": "button",
@@ -409,11 +410,14 @@ def notifyWithButton():
                                            }
                                        ]
                                    }
-    ###json.dumps(paramPayload, ensure_ascii=False)
     requestJSON = {}
     requestJSON["recipient"] = json.dumps(paramRecipient, ensure_ascii=False)
-    requestJSON["message"] = json.dumps(paramAttachment, ensure_ascii=False)
+    requestJSON["message"] = json.dumps(paramMessage, ensure_ascii=False)
+    
     r = requests.post(url, data = requestJSON, headers={'Content-type': 'application/json'})
+    print(r.status_code, r.reason)
+    print(r.text[:300] + '...')
+    print "--------------------->>>>>>>>>>>>>>" + "<<<<<<<<<<<<--------------------"
     
 def makeWebhookResult(req):
     print "-------------DOWN IS REQUEST START------------"
