@@ -412,7 +412,7 @@ def notifyWithButton():
                                    }
     requestJSON = {}
     requestJSON["recipient"] = json.dumps(paramRecipient, ensure_ascii=False)
-    requestJSON["message"] = json.dumps(paramMessage, ensure_ascii=False)
+    requestJSON["message"] = json.dumps(paramAttachment, ensure_ascii=False)
     
     r = requests.post(url, data = requestJSON, headers={'Content-type': 'application/json'})
     print(r.status_code, r.reason)
