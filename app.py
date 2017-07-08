@@ -394,13 +394,13 @@ def notifyWithGIF():
     print "---------------------CALLLING NOTIFY WITH GIF------------------------"
     
     access_token = "EAASr1ZCrcjQkBADfZCmEo87CLaDUTy9pDWWn8CZCX45ekEcHxbk459jAcGnyGENSZBbcNuSLgRGjToh3MXPUYeqZBlEwEtl3yVinBBFdxdssk1Ga2n7zTfKLMiiXsuU35H3KsPrISHmaDbsSZAoa6PQes8V2sqBRVJZAEYOqIZB5vwZDZD"
-    url = "https://graph.facebook.com/v2.6/me/message_attachments?access_token=" + access_token
+    url = "https://graph.facebook.com/v2.6/me/messages?access_token=" + access_token
 
     userID = "1034552696650591"
 
     attachedGif = "https://media.giphy.com/media/26BoDYDTteuyZCh3y/giphy.gif"
     paramUrl = {"url":attachedGif}
-    paramPayload = {}#json.dumps(paramUrl, ensure_ascii=False)
+    paramPayload = json.dumps(paramUrl, ensure_ascii=False)
     
     paramAttachment = {}
     paramAttachment["type"] = "image"
