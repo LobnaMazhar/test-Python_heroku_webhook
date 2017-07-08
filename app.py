@@ -332,7 +332,8 @@ def notifyUser():
     requestJSON = {}
     requestJSON["recipient"] = json.dumps(paramRecipient, ensure_ascii=False)
     requestJSON["message"] = json.dumps(paramMessage, ensure_ascii=False)
-    
+
+    print requestJSON
     r = requests.post(url, data = requestJSON, headers={'Content-type': 'application/json'})
     print(r.status_code, r.reason)
     print(r.text[:300] + '...')
@@ -402,8 +403,8 @@ def notifyWithGIF():
     paramUrl = {"url":attachedGif}
     paramPayload = json.dumps(paramUrl, ensure_ascii=False)
     
-    paramAttachment = { "type": "image" }
-   # paramAttachment["type"] = "image"
+    paramAttachment = {}
+    paramAttachment["type"] = "image"
     paramAttachment["payload"] = json.dumps(paramPayload, ensure_ascii=False)
     
     paramRecipient = { "id": userID }
