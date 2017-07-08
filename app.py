@@ -396,7 +396,7 @@ def notifyWithButton():
     userID = "1034552696650591"
 
     paramRecipient = { "id": userID }
-    paramPayload = json.dumps(paramUrl, ensure_ascii=False)
+    ###paramPayload = json.dumps(paramUrl, ensure_ascii=False)
     paramAttachment["type"] = "template"
     paramAttachment["payload"] = { "template_type": "button",
                                    "text": "Let's play",
