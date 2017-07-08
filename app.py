@@ -398,16 +398,20 @@ def notifyWithGIF():
 
     userID = "1034552696650591"
 
-    paramRecipient = { "id": userID }
     attachedGif = "https://www.facebook.com/?sk=h_chr#"
     paramUrl = {"url":attachedGif}
     paramPayload = json.dumps(paramUrl, ensure_ascii=False)
+    
     paramAttachment = {}
     paramAttachment["type"] = "image"
     paramAttachment["payload"] = json.dumps(paramPayload, ensure_ascii=False)
+    
+    paramRecipient = { "id": userID }
+    paramMessage = {"attachment": json.dumps(paramAttachment, ensure_ascii=False)}
+    
     requestJSON = {}
     requestJSON["recipient"] = json.dumps(paramRecipient, ensure_ascii=False)
-    requestJSON["message"] = json.dumps(paramAttachment, ensure_ascii=False)
+    requestJSON["message"] = json.dumps(paramMessage, ensure_ascii=False)
 
     r = requests.post(url, data=requestJSON, headers={'Content-type': 'application/json'})
     print(r.status_code, r.reason)
