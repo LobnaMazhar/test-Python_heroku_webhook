@@ -400,7 +400,7 @@ def notifyWithGIF():
 
     userID = "1034552696650591"
 
-    attachedGif = "https://media.giphy.com/media/26BoDYDTteuyZCh3y/giphy.gif"
+    attachedGif = "https://media.tenor.co/images/c5bcb580606673d5c9feac4c8ff3b9c7/tenor.gif"
     paramPayload = { "url": attachedGif }
     
     paramAttachment = {}
@@ -447,7 +447,8 @@ def notifyWithButton():
     requestJSON = {}
     requestJSON["recipient"] = json.dumps(paramRecipient, ensure_ascii=False)
     requestJSON["message"] = json.dumps(paramMessage, ensure_ascii=False)
-    
+
+    print requestJSON
     r = requests.post(url, data = requestJSON, headers={'Content-type': 'application/json'})
     print(r.status_code, r.reason)
     print(r.text[:300] + '...')
