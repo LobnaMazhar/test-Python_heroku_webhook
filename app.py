@@ -332,8 +332,16 @@ def notifyUser():
     requestJSON = {}
     requestJSON["recipient"] = json.dumps(paramRecipient, ensure_ascii=False)
     requestJSON["message"] = json.dumps(paramMessage, ensure_ascii=False)
-    
-    r = requests.post(url, data = requestJSON, headers={'Content-type': 'application/json'})
+
+    requestJSON_json = {
+        "recipient": {
+            "id": 1034552696650591
+            },
+        "message": {
+            "text": "hello, world! --OWN"
+            }
+        }
+    r = requests.post(url, data = requestJSON_json, headers={'Content-type': 'application/json'})
     print(r.status_code, r.reason)
     print(r.text[:300] + '...')
     print "--------------------->>>>>>>>>>>>>>" + "<<<<<<<<<<<<--------------------"
