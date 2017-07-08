@@ -47,6 +47,7 @@ def webhookNotify():
     print "NOTIFYING"
     notifyUser()
     notifyWithGIF();
+    notifyWithButton()
 
 def requestGame(req):
     originalRequest = req.get("originalRequest")
@@ -431,22 +432,21 @@ def notifyWithButton():
     paramPayload = {}
     paramPayload["template_type"] = "button"
     paramPayload["text"] = "Let's play"
-    paramPayload["buttons"] = [
-        {
-            "title": "Play",
-            "type": "postback",
-            "payload": "reqGame"
-            }
-        ]
+    paramPayload["buttons"] = [{
+        "title": "Play",
+        "type": "postback",
+        "payload": "reqGame"
+        }]
 
-    paramAttachmentDetails = {}
-    paramAttachmentDetails["type"] = "template"
-    paramAttachmentDetails["payload"] = json.dumps(paramPayload, ensure_ascii=False)
-    paramAttachment = { "attachment": json.dumps(paramAttachmentDetails, ensure_ascii=False)}
+    paramAttachment = {}
+    paramAttachment["type"] = "template"
+    paramAttachment["payload"] = json.dumps(paramPayload, ensure_ascii=False)
+
+    paramMessage = { "attachment": json.dumps(paramAttachment, ensure_ascii=False)} 
     
     requestJSON = {}
     requestJSON["recipient"] = json.dumps(paramRecipient, ensure_ascii=False)
-    requestJSON["message"] = json.dumps(paramAttachment, ensure_ascii=False)
+    requestJSON["message"] = json.dumps(paramMessage, ensure_ascii=False)
     
     r = requests.post(url, data = requestJSON, headers={'Content-type': 'application/json'})
     print(r.status_code, r.reason)
