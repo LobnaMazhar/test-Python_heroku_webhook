@@ -401,26 +401,11 @@ def notifyWithGIF():
     userID = "1034552696650591"
 
     attachedGif = "https://media.tenor.co/images/c5bcb580606673d5c9feac4c8ff3b9c7/tenor.gif"
-    paramPayload = { "url": attachedGif }
-    
-    paramAttachment = {}
-    paramAttachment["type"] = "image"
-    paramAttachment["payload"] = json.dumps(paramPayload, ensure_ascii=False)
-    
-    paramRecipient = { "id": userID }
-    paramMessage = { "attachment": json.dumps(paramAttachment, ensure_ascii=False) }
-
-    requestJSON = {}
-    requestJSON["recipient"] = json.dumps(paramRecipient, ensure_ascii=False)
-    requestJSON["message"] = json.dumps(paramMessage, ensure_ascii=False)
-
-    print requestJSON
-
-    re = { 'recipient': '{"id": '+ userID + '}',
+    requestJSON = { 'recipient': '{"id": '+ userID + '}',
            "message": '{ "attachment": { "type":"image", "payload":{ "url":' + '"' + attachedGif + '"' + ' } } }'
            }
     
-    r = requests.post(url, data=re, headers={'Content-type': 'application/json'})
+    r = requests.post(url, data=requestJSON, headers={'Content-type': 'application/json'})
     print(r.status_code, r.reason)
     print(r.text[:300] + '...')
 
@@ -454,7 +439,12 @@ def notifyWithButton():
     requestJSON["message"] = json.dumps(paramMessage, ensure_ascii=False)
 
     print requestJSON
-    r = requests.post(url, data = requestJSON, headers={'Content-type': 'application/json'})
+
+    re = { "recipient": '{ "id": ' + userID + ' }',
+           "message": '{ "attachment": { "type":"template", "payload":{ "template_type":"button", "text":"What do you want to do next?", "buttons":[ { "type":"postback", "title":"Start game", "payload":"reqGame" }]}}}'
+    }
+    
+    r = requests.post(url, data = re, headers={'Content-type': 'application/json'})
     print(r.status_code, r.reason)
     print(r.text[:300] + '...')
     print "--------------------->>>>>>>>>>>>>>" + "<<<<<<<<<<<<--------------------"
