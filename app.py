@@ -416,8 +416,8 @@ def notifyWithGIF():
 
     print requestJSON
 
-    re = { 'recipient': '{"id": "1034552696650591"}',
-           "message": '{ "attachment": { "type":"image", "payload":{ "url":"https://media.tenor.co/images/c5bcb580606673d5c9feac4c8ff3b9c7/tenor.gif" } } }'
+    re = { 'recipient': '{"id": '+ userID + '}',
+           "message": '{ "attachment": { "type":"image", "payload":{ "url":' + attachedGif + ' } } }'
            }
     
     r = requests.post(url, data=re, headers={'Content-type': 'application/json'})
