@@ -402,7 +402,7 @@ def notifyWithGIF():
     paramUrl = {"url":attachedGif}
     paramPayload = json.dumps(paramUrl, ensure_ascii=False)
     
-    paramAttachment = { "type": "image" }
+    paramAttachment = { "type": "image", "payload": json.dumps(paramPayload, ensure_ascii=False) }
    # paramAttachment["type"] = "image"
    # paramAttachment["payload"] = json.dumps(paramPayload, ensure_ascii=False)
     
