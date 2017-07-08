@@ -388,6 +388,31 @@ def getAppScopedID(req):
     res = json.loads(r.text)
     print(res.get("from").get("id"))
     print "--------------------->>>>>>>>>>>>>>" + "<<<<<<<<<<<<--------------------"
+
+def notifyWithButton():
+    access_token = "EAACEdEose0cBAK3xy0srLgllZCYTWKZAOUUZCL06BBmozGcOyvmgytVEAPFA0yZAS9iOYW9PhLkpCHelUN4PM8otbTyC5aANr3f8FRykybHGNaJujkMPipVFd2vAZAQWWZAaZCtbazbLZCVL8XSDd5QApI2ntICGMN2ZAFyw5UKzZCXF7oWwqPQtxUdHp9m96pADAIWamviqndZBgZDZD
+    url = "https://graph.facebook.com/v2.9/me/messages?access_token=" + access_token
+
+    userID = "1034552696650591"
+
+    paramRecipient = { "id": userID }
+    paramPayload = json.dumps(paramUrl, ensure_ascii=False)
+    paramAttachment["type"] = "template"
+    paramAttachment["payload"] = { "template_type": "button",
+                                   "text": "Let's play",
+                                   "buttons": [
+                                       {
+                                           "title": "Play",
+                                           "type": "postback",
+                                           "payload": "reqGame"
+                                           }
+                                       ]
+                                   }
+    ###json.dumps(paramPayload, ensure_ascii=False)
+    requestJSON = {}
+    requestJSON["recipient"] = json.dumps(paramRecipient, ensure_ascii=False)
+    requestJSON["message"] = json.dumps(paramAttachment, ensure_ascii=False)
+    r = requests.post(url, data = requestJSON, headers={'Content-type': 'application/json'})
     
 def makeWebhookResult(req):
     print "-------------DOWN IS REQUEST START------------"
@@ -423,6 +448,8 @@ def makeWebhookResult(req):
         return getId_pages()
     elif req.get("result").get("action") == "appScopedID":
         return getAppScopedID(req)
+    elif req.get("result").get("action") == "notifyMeWithButton":
+        return notifyWithButton()
     else:
         return {}
 
