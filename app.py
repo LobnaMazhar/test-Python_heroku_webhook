@@ -407,7 +407,8 @@ def notifyWithGIF():
     paramAttachment["payload"] = json.dumps(paramPayload, ensure_ascii=False)
     
     paramRecipient = { "id": userID }
-    paramMessage = {"attachment": json.dumps(paramAttachment, ensure_ascii=False)}
+    paramMessage = {}
+    paramMessage["attachment"] = json.dumps(paramAttachment, ensure_ascii=False)
     
     requestJSON = {}
     requestJSON["recipient"] = json.dumps(paramRecipient, ensure_ascii=False)
