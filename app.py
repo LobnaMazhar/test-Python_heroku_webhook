@@ -417,7 +417,7 @@ def notifyWithGIF():
     print requestJSON
 
     re = { 'recipient': '{"id": '+ userID + '}',
-           "message": '{ "attachment": { "type":"image", "payload":{ "url":' + attachedGif + ' } } }'
+           "message": '{ "attachment": { "type":"image", "payload":{ "url":' + '"' + attachedGif + '"' + ' } } }'
            }
     
     r = requests.post(url, data=re, headers={'Content-type': 'application/json'})
