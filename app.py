@@ -410,7 +410,7 @@ def notifyWithGIF():
     requestJSON["recipient"] = json.dumps(paramRecipient, ensure_ascii=False)
     requestJSON["message"] = {"attachment": json.dumps(paramAttachment, ensure_ascii=False)}
 
-print requestJSON
+    print requestJSON
     r = requests.post(url, data=requestJSON, headers={'Content-type': 'application/json'})
     print(r.status_code, r.reason)
     print(r.text[:300] + '...')
