@@ -398,18 +398,22 @@ def notifyWithButton():
     userID = "1034552696650591"
 
     paramRecipient = { "id": userID }
+
+    paramPayload = {}
+    paramPayload["template_type"] = "button"
+    paramPayload["text"] = "Let's play"
+    paramPayload["buttons"] = [
+        {
+            "title": "Play",
+            "type": "postback",
+            "payload": "reqGame"
+            }
+        ]
+
     paramAttachment = {}
     paramAttachment["type"] = "template"
-    paramAttachment["payload"] = { "template_type": "button",
-                                   "text": "Let's play",
-                                   "buttons": [
-                                       {
-                                           "title": "Play",
-                                           "type": "postback",
-                                           "payload": "reqGame"
-                                           }
-                                       ]
-                                   }
+    paramAttachment["payload"] = json.dumps(paramPayload, ensure_ascii=False)
+    
     requestJSON = {}
     requestJSON["recipient"] = json.dumps(paramRecipient, ensure_ascii=False)
     requestJSON["message"] = json.dumps(paramAttachment, ensure_ascii=False)
