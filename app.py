@@ -400,11 +400,11 @@ def notifyWithGIF():
 
     attachedGif = "https://media.giphy.com/media/26BoDYDTteuyZCh3y/giphy.gif"
     paramUrl = {"url":attachedGif}
-    paramPayload = json.dumps(paramUrl, ensure_ascii=False)
+    paramPayload = {}#json.dumps(paramUrl, ensure_ascii=False)
     
     paramAttachment = {}
-  #  paramAttachment["type"] = "image"
-  #  paramAttachment["payload"] = json.dumps(paramPayload, ensure_ascii=False)
+    paramAttachment["type"] = "image"
+    paramAttachment["payload"] = json.dumps(paramPayload, ensure_ascii=False)
     
     paramRecipient = { "id": userID }
     paramMessage = {}
